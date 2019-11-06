@@ -1,6 +1,8 @@
 defmodule CuriousMessengerWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :curious_messenger
 
+  socket "/live", Phoenix.LiveView.Socket
+
   socket "/socket", CuriousMessengerWeb.UserSocket,
     websocket: true,
     longpoll: false
