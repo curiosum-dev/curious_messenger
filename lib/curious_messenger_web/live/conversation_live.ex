@@ -30,7 +30,7 @@ defmodule CuriousMessengerWeb.ConversationLive do
     """
   end
 
-  def mount(_assigns, socket) do
+  def mount(assigns, socket) do
     {:ok, socket}
   end
 
@@ -46,6 +46,14 @@ defmodule CuriousMessengerWeb.ConversationLive do
          }) do
       {:ok, new_message} ->
         new_message = %{new_message | user: user}
+
+        CuriousMessengerWeb.Endpoint.broadcast_from!(
+          self(),
+          "conversation_#{conversation_id}",
+          "new_message",
+          new_message
+        )
+
         updated_messages = socket.assigns[:messages] ++ [new_message]
 
         {:noreply, socket |> assign(:messages, updated_messages)}
@@ -56,6 +64,8 @@ defmodule CuriousMessengerWeb.ConversationLive do
   end
 
   def handle_params(%{"conversation_id" => conversation_id, "user_id" => user_id}, _uri, socket) do
+    CuriousMessengerWeb.Endpoint.subscribe("conversation_#{conversation_id}")
+
     {:noreply,
      socket
      |> assign(:user_id, user_id)
@@ -63,7 +73,13 @@ defmodule CuriousMessengerWeb.ConversationLive do
      |> assign_records()}
   end
 
-  def assign_records(%{assigns: %{user_id: user_id, conversation_id: conversation_id}} = socket) do
+  def handle_info(%{event: "new_message", payload: new_message}, socket) do
+    updated_messages = socket.assigns[:messages] ++ [new_message]
+
+    {:noreply, socket |> assign(:messages, updated_messages)}
+  end
+
+  defp assign_records(%{assigns: %{user_id: user_id, conversation_id: conversation_id}} = socket) do
     user = Auth.get_user!(user_id)
 
     conversation =
