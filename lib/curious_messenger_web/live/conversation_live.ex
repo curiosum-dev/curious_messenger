@@ -1,4 +1,6 @@
 defmodule CuriousMessengerWeb.ConversationLive do
+  require Logger
+
   use Phoenix.LiveView, layout: {CuriousMessengerWeb.LayoutView, "live.html"}
   use Phoenix.HTML
 
@@ -47,20 +49,17 @@ defmodule CuriousMessengerWeb.ConversationLive do
       {:ok, new_message} ->
         new_message = %{new_message | user: user}
 
-        CuriousMessengerWeb.Endpoint.broadcast_from!(
-          self(),
+        CuriousMessengerWeb.Endpoint.broadcast(
           "conversation_#{conversation_id}",
           "new_message",
           new_message
         )
 
-        updated_messages = socket.assigns[:messages] ++ [new_message]
-
-        {:noreply, socket |> assign(:messages, updated_messages)}
-
-      {:error, _} ->
-        {:noreply, socket}
+      {:error, err} ->
+        Logger.error(err)
     end
+
+    {:noreply, socket}
   end
 
   def handle_params(%{"conversation_id" => conversation_id, "user_id" => user_id}, _uri, socket) do
