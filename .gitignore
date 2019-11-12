@@ -35,3 +35,4 @@ npm-debug.log
 .elixir_ls
 /config/dev.secret.exs
 /config/test.secret.exs
+/Mnesia.*

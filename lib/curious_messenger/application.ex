@@ -11,9 +11,10 @@ defmodule CuriousMessenger.Application do
       # Start the Ecto repository
       CuriousMessenger.Repo,
       # Start the endpoint when the application starts
-      CuriousMessengerWeb.Endpoint
+      CuriousMessengerWeb.Endpoint,
       # Starts a worker by calling: CuriousMessenger.Worker.start_link(arg)
       # {CuriousMessenger.Worker, arg},
+      Pow.Store.Backend.MnesiaCache
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

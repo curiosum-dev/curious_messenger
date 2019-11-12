@@ -12,7 +12,13 @@
       <section class="container">
         <nav role="navigation">
           <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
+            <%= if Pow.Plug.current_user(@conn) do %>
+              <li><%= link "Profile", to: Routes.pow_registration_path(@conn, :edit) %></li>
+              <li><%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete %></li>
+            <% else %>
+              <li><%= link "Register", to: Routes.pow_registration_path(@conn, :new) %></li>
+              <li><%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %></li>
+            <% end %>
           </ul>
         </nav>
         <a href="http://phoenixframework.org/" class="phx-logo">

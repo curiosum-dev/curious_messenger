@@ -44,5 +44,9 @@ defmodule CuriousMessengerWeb.Endpoint do
     key: "_curious_messenger_key",
     signing_salt: "zb4BgxeG"
 
+  plug Pow.Plug.Session,
+    otp_app: :curious_messenger,
+    cache_store_backend: Pow.Store.Backend.MnesiaCache
+
   plug CuriousMessengerWeb.Router
 end
