@@ -43,7 +43,8 @@ defmodule CuriousMessenger.MixProject do
       {:phoenix_live_view, "~> 0.14.8"},
       {:gettext, "~> 0.18.2"},
       {:jason, "~> 1.2.2"},
-      {:plug_cowboy, "~> 2.4.1"}
+      {:plug_cowboy, "~> 2.4.1"},
+      {:pow, "~> 1.0.21"}
     ]
   end
 

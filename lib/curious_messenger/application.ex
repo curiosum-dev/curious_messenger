@@ -14,7 +14,8 @@ defmodule CuriousMessenger.Application do
       CuriousMessengerWeb.Endpoint,
       # Starts a worker by calling: CuriousMessenger.Worker.start_link(arg)
       # {CuriousMessenger.Worker, arg},
-      {Phoenix.PubSub, [name: CuriousMessenger.PubSub, adapter: Phoenix.PubSub.PG2]}
+      {Phoenix.PubSub, [name: CuriousMessenger.PubSub, adapter: Phoenix.PubSub.PG2]},
+      Pow.Store.Backend.MnesiaCache
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

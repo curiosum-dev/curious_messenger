@@ -1,5 +1,6 @@
 defmodule CuriousMessengerWeb.Router do
   use CuriousMessengerWeb, :router
+  use Pow.Phoenix.Router
   import Phoenix.LiveView.Router
 
   pipeline :browser do
@@ -14,6 +15,12 @@ defmodule CuriousMessengerWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  scope "/" do
+    pipe_through :browser
+
+    pow_routes()
   end
 
   scope "/", CuriousMessengerWeb do
