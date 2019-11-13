@@ -7,7 +7,7 @@ defmodule CuriousMessenger.Chat.Conversation do
   schema "chat_conversations" do
     field :title, :string
 
-    has_many :conversation_members, ConversationMember
+    has_many :conversation_members, ConversationMember, on_replace: :delete
     has_many :messages, Message
 
     timestamps()

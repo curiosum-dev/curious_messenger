@@ -4,9 +4,12 @@ defmodule CuriousMessenger.Chat do
   """
 
   import Ecto.Query, warn: false
+
   alias CuriousMessenger.Repo
 
   alias CuriousMessenger.Chat.Message
+
+  alias CuriousMessenger.Chat.Conversation.Batches
 
   @doc """
   Returns the list of chat_messages.
@@ -529,10 +532,11 @@ defmodule CuriousMessenger.Chat do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_conversation(attrs \\ %{}) do
-    %Conversation{}
-    |> Conversation.changeset(attrs)
-    |> Repo.insert()
+  def create_conversation(attrs \\ %{}, member_attrs \\ []) do
+    case Batches.create_conversation_with_members(attrs, member_attrs) |> Repo.transaction() do
+      {:ok, %{create_conversation_members: conversation}} -> {:ok, conversation}
+      anything -> anything
+    end
   end
 
   @doc """
