@@ -1,35 +1,28 @@
 <section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed or maintainability.</p>
+  <h1><%= gettext "Welcome to %{name}!", name: "Curious Messenger" %></h1>
+  <p>An awesome instant messaging app<br/>made with ❤️ by <a href="https://curiosum.dev">Curiosum</a>.</p>
 </section>
 
 <section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.4/CHANGELOG.md">v1.4 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-    </ul>
-  </article>
+  <%= if @current_user do %>
+    <article class="column">
+      <h2>Ongoing Conversations</h2>
+      <ul>
+        <%= for conversation <- @current_user.conversations do %>
+          <%= link conversation.title, to: Routes.conversation_path(@conn, CuriousMessengerWeb.ConversationLive, conversation.id, @current_user.id) %>
+        <% end %>
+      </ul>
+    </article>
+    <article class="column">
+      <h2>Contact List</h2>
+      <%= form_for @conversation_changeset, Routes.conversation_path(@conn, :create) do %>
+        <ul>
+          <%= for user <- @contacts do %>
+            
+          <% end %>
+        </ul>
+      <% end %>
+
+    </article>
+  <% end%>
 </section>
