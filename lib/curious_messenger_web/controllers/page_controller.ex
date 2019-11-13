@@ -6,6 +6,7 @@ defmodule CuriousMessengerWeb.PageController do
 
   plug CuriousMessengerWeb.AssignUser, preload: :conversations
   plug :assign_contacts
+  plug :assign_new_conversation_changeset
 
   def index(conn, opts \\ []) do
     render(conn, "index.html")
