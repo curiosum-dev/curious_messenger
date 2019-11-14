@@ -1,0 +1,47 @@
+<article class="column">
+  <h2>Ongoing Conversations</h2>
+  <%= for conversation <- @current_user.conversations do %>
+    <div>
+      <%= link conversation.title, to: Routes.conversation_path(@socket, CuriousMessengerWeb.ConversationLive, conversation.id, @current_user.id) %>
+    </div>
+  <% end %>
+</article>
+
+<article class="column">
+  <h2>Create Conversation</h2>
+
+  <%= form_for @conversation_changeset,
+               "",
+               [phx_submit: :create_conversation], fn f -> %>
+    <p>
+      <%= inputs_for f, :conversation_members, fn cmf -> %>
+        <% user_id = cmf.source.changes[:user_id] %>
+        <% nickname = @contacts |> Enum.find(&(&1.id == user_id)) |> Map.get(:nickname) %>
+
+        <%= link "#{nickname} #{if user_id == @current_user.id, do: "(me)", else: "✖"} ",
+                  to: "#!",
+                  phx_click: (unless user_id == @current_user.id, do: "remove_member"),
+                  phx_value_user_id: user_id %>
+        
+        <%= hidden_input cmf, :user_id, value: user_id %>
+      <% end %>
+    </p>
+
+    <p>
+      <%= text_input f, :title, placeholder: "Title (optional)" %>
+      <%= submit "Create", disabled: Enum.count(@conversation_changeset.changes[:conversation_members]) < 2 %>
+    </p>
+
+    <ul>
+      <%= for user <- Enum.reject(@contacts, &(&1.id == @current_user.id)) do %>
+        <li>
+          <%= link user.nickname,
+                   to: "#!",
+                   phx_click: "add_member",
+                   phx_value_user_id: user.id %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+</article>
