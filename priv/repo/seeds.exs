@@ -11,7 +11,7 @@
 # and so on) as they will fail if something goes wrong.
 
 alias CuriousMessenger.Auth.User
-alias CuriousMessenger.Chat.{Conversation, ConversationMember}
+alias CuriousMessenger.Chat.Conversation
 
 alias CuriousMessenger.{Auth, Chat}
 
@@ -35,13 +35,10 @@ rand2 = Enum.random(0..1000)
   })
 
 {:ok, %Conversation{id: conv_id} = conversation} =
-  Chat.create_conversation(%{title: "Modern Talking"})
-
-{:ok, %ConversationMember{}} =
-  Chat.create_conversation_member(%{conversation_id: conv_id, user_id: u1_id, owner: true})
-
-{:ok, %ConversationMember{}} =
-  Chat.create_conversation_member(%{conversation_id: conv_id, user_id: u2_id, owner: false})
+  Chat.create_conversation(%{
+    title: "Modern Talking",
+    conversation_members: [%{user_id: u1_id, owner: true}, %{user_id: u2_id, owner: false}]
+  })
 
 IO.puts("Created records:")
 IO.inspect(user1)
