@@ -61,16 +61,14 @@ defmodule CuriousMessengerWeb.DashboardLive do
     old_members = socket.assigns[:conversation_changeset].changes.conversation_members
     existing_ids = old_members |> Enum.map(& &1.changes.user_id)
 
-    cond do
-      new_member_id not in existing_ids ->
-        new_members = [%{user_id: new_member_id} | old_members]
+    if new_member_id not in existing_ids do
+      new_members = [%{user_id: new_member_id} | old_members]
 
-        new_changeset = Changeset.put_change(changeset, :conversation_members, new_members)
+      new_changeset = Changeset.put_change(changeset, :conversation_members, new_members)
 
-        {:noreply, assign(socket, :conversation_changeset, new_changeset)}
-
-      true ->
-        {:noreply, socket}
+      {:noreply, assign(socket, :conversation_changeset, new_changeset)}
+    else
+      {:noreply, socket}
     end
   end
 
@@ -110,7 +108,7 @@ defmodule CuriousMessengerWeb.DashboardLive do
 
     contacts
     |> Enum.filter(&(&1.id in user_ids))
-    |> Enum.map(&(&1.nickname))
+    |> Enum.map(& &1.nickname)
     |> Enum.join(", ")
   end
 end
