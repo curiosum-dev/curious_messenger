@@ -1,4 +1,6 @@
 defmodule CuriousMessengerWeb.DashboardLive do
+  require Logger
+
   use Phoenix.LiveView, container: {:div, [class: "row"]}
   use Phoenix.HTML
 
@@ -41,14 +43,18 @@ defmodule CuriousMessengerWeb.DashboardLive do
         )
       )
 
-    {:ok, _} = Chat.create_conversation(conversation_form)
+    case Chat.create_conversation(conversation_form) do
+      {:ok, _} ->
+        {:noreply,
+         assign(
+           socket,
+           :current_user,
+           Repo.preload(current_user, :conversations, force: true)
+         )}
 
-    {:noreply,
-     assign(
-       socket,
-       :current_user,
-       Repo.preload(current_user, :conversations, force: true)
-     )}
+      {:error, err} ->
+        Logger.error(inspect(err))
+    end
   end
 
   def handle_event(
