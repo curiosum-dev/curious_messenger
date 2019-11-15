@@ -2,7 +2,7 @@ defmodule CuriousMessengerWeb.DashboardLive do
   use Phoenix.LiveView, container: {:div, [class: "row"]}
   use Phoenix.HTML
 
-  alias CuriousMessenger.Auth
+  alias CuriousMessenger.{Auth, Chat}
   alias CuriousMessenger.Chat.Conversation
   alias CuriousMessengerWeb.DashboardView
   alias CuriousMessenger.Repo
@@ -41,10 +41,7 @@ defmodule CuriousMessengerWeb.DashboardLive do
         )
       )
 
-    {:ok, _} =
-      %Conversation{}
-      |> Conversation.changeset(conversation_form)
-      |> Repo.insert()
+    {:ok, _} = Chat.create_conversation(conversation_form)
 
     {:noreply,
      assign(

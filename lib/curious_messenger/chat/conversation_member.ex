@@ -18,11 +18,8 @@ defmodule CuriousMessenger.Chat.ConversationMember do
   def changeset(conversation_member, attrs) do
     conversation_member
     |> cast(attrs, [:owner, :user_id])
-    |> unique_constraint(:user,
-      name: :chat_conversation_members_conversation_id_user_id_index
-    )
-    |> unique_constraint(:conversation_id,
-      name: :chat_conversation_members_owner
-    )
+    |> validate_required([:owner, :user_id])
+    |> unique_constraint(:user, name: :chat_conversation_members_conversation_id_user_id_index)
+    |> unique_constraint(:conversation_id, name: :chat_conversation_members_owner)
   end
 end
