@@ -107,7 +107,10 @@ defmodule CuriousMessengerWeb.DashboardLive do
 
   defp build_title(changeset, contacts) do
     user_ids = Enum.map(changeset.changes.conversation_members, & &1.changes.user_id)
-    nicknames = contacts |> Enum.filter(&(&1.id in user_ids)) |> Enum.map(& &1.nickname)
-    Enum.join(nicknames, ", ")
+
+    contacts
+    |> Enum.filter(&(&1.id in user_ids))
+    |> Enum.map(&(&1.nickname))
+    |> Enum.join(", ")
   end
 end
