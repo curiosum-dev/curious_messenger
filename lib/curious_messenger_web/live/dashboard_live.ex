@@ -97,7 +97,7 @@ defmodule CuriousMessengerWeb.DashboardLive do
     changeset =
       %Conversation{}
       |> Conversation.changeset(%{
-        "conversation_members" => [%{owner: true, user_id: socket.assigns[:current_user].id}]
+        conversation_members: [%{owner: true, user_id: socket.assigns[:current_user].id}]
       })
 
     assign(socket, :conversation_changeset, changeset)
