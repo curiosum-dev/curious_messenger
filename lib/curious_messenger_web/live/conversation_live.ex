@@ -28,14 +28,14 @@ defmodule CuriousMessengerWeb.ConversationLive do
       {:ok, new_message} ->
         new_message = %{new_message | user: user}
 
-        CuriousMessengerWeb.Endpoint.broadcast(
+        CuriousMessengerWeb.Endpoint.broadcast!(
           "conversation_#{conversation_id}",
           "new_message",
           new_message
         )
 
       {:error, err} ->
-        Logger.error(err)
+        Logger.error(inspect(err))
     end
 
     {:noreply, socket}
