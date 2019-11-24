@@ -15,6 +15,8 @@ defmodule CuriousMessengerWeb.DashboardLive do
   end
 
   def mount(_params, %{"current_user" => current_user}, socket) do
+    CuriousMessengerWeb.Endpoint.subscribe("user_conversations_#{current_user.id}")
+
     {:ok,
      socket
      |> assign(current_user: current_user)
@@ -28,7 +30,6 @@ defmodule CuriousMessengerWeb.DashboardLive do
         %{
           assigns: %{
             conversation_changeset: changeset,
-            current_user: current_user,
             contacts: contacts
           }
         } = socket
@@ -45,15 +46,11 @@ defmodule CuriousMessengerWeb.DashboardLive do
 
     case Chat.create_conversation(conversation_form) do
       {:ok, _} ->
-        {:noreply,
-         assign(
-           socket,
-           :current_user,
-           Repo.preload(current_user, :conversations, force: true)
-         )}
+        {:noreply, socket}
 
       {:error, err} ->
         Logger.error(inspect(err))
+        {:noreply, socket}
     end
   end
 
@@ -91,6 +88,13 @@ defmodule CuriousMessengerWeb.DashboardLive do
     new_changeset = Changeset.put_change(changeset, :conversation_members, new_members)
 
     {:noreply, assign(socket, :conversation_changeset, new_changeset)}
+  end
+
+  def handle_info(%{event: "new_conversation", payload: new_conversation}, socket) do
+    user = socket.assigns[:current_user]
+    user = %{user | conversations: user.conversations ++ [new_conversation]}
+
+    {:noreply, assign(socket, :current_user, user)}
   end
 
   defp assign_new_conversation_changeset(socket) do
