@@ -18,5 +18,33 @@ import "phoenix_html"
 import { Socket } from "phoenix"
 import LiveSocket from "phoenix_live_view"
 
-let liveSocket = new LiveSocket("/live", Socket)
+let Hooks = {
+  CreateConversationForm: {
+    disconnected() {
+      console.log("Disconnected", this)
+    },
+
+    reconnected() {
+      console.log("Reconnected", this)
+    },
+
+    mounted() {
+      console.log("Mounted", this)
+    },
+
+    destroyed() {
+      console.log("Destroyed", this)
+    },
+
+    disconnected() {
+      console.log("Disconnected", this)
+    },
+
+    updated() {
+      console.log("Updated", this)
+    }
+  }
+};
+
+let liveSocket = new LiveSocket("/live", Socket, { hooks: Hooks })
 liveSocket.connect()
