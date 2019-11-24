@@ -531,9 +531,28 @@ defmodule CuriousMessenger.Chat do
 
   """
   def create_conversation(attrs \\ %{}) do
-    %Conversation{}
-    |> Conversation.changeset(attrs)
-    |> Repo.insert()
+    result =
+      %Conversation{}
+      |> Conversation.changeset(attrs)
+      |> Repo.insert()
+
+    case result do
+      {:ok, conversation} ->
+        conversation.conversation_members
+        |> Enum.map(& &1.user_id)
+        |> Enum.each(
+          &CuriousMessengerWeb.Endpoint.broadcast!(
+            "user_conversations_#{&1}",
+            "new_conversation",
+            conversation
+          )
+        )
+
+        result
+
+      _ ->
+        result
+    end
   end
 
   @doc """
