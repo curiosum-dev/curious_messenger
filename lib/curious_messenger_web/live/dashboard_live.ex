@@ -90,6 +90,22 @@ defmodule CuriousMessengerWeb.DashboardLive do
     {:noreply, assign(socket, :conversation_changeset, new_changeset)}
   end
 
+  def handle_event("restore_state", %{"form_data" => form_data}, socket) do
+    # Decode form data sent from the pre-disconnect form
+    decoded_form_data = Plug.Conn.Query.decode(form_data)
+
+    # Since the new LiveView has already run the mount function, we have the changeset assigned
+    %{assigns: %{conversation_changeset: changeset}} = socket
+
+    # Now apply decoded form data to that changeset
+    restored_changeset =
+      changeset
+      |> Conversation.changeset(decoded_form_data["conversation"])
+
+    # Reassign the changeset, which will then trigger a re-render
+    {:noreply, assign(socket, :conversation_changeset, restored_changeset)}
+  end
+
   def handle_info(%{event: "new_conversation", payload: new_conversation}, socket) do
     user = socket.assigns[:current_user]
     user = %{user | conversations: user.conversations ++ [new_conversation]}
