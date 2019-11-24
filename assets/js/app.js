@@ -26,6 +26,9 @@ let Hooks = {
 
     reconnected() {
       console.log("Reconnected", this)
+      let formData = new FormData(this.el)
+      let queryString = new URLSearchParams(formData)
+      this.pushEvent("restore_state", { form_data: queryString.toString() })
     },
 
     mounted() {
