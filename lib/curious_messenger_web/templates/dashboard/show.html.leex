@@ -10,7 +10,7 @@
 <article class="column">
   <h2>Create Conversation</h2>
 
-  <%= form_for @conversation_changeset, "", [phx_submit: :create_conversation], fn f -> %>
+  <%= form_for @conversation_changeset, "", [phx_submit: :create_conversation, phx_hook: "CreateConversationForm"], fn f -> %>
     <p>
       <%= inputs_for f, :conversation_members, fn cmf -> %>
         <%= remove_member_link(@contacts, cmf.source.changes[:user_id], @current_user.id) %>
