@@ -17,37 +17,9 @@ import "phoenix_html"
 // import socket from "./socket"
 import { Socket } from "phoenix"
 import LiveSocket from "phoenix_live_view"
+import CreateConversationFormHooks from "./dashboard_live";
 
-let Hooks = {
-  CreateConversationForm: {
-    disconnected() {
-      console.log("Disconnected", this)
-    },
-
-    reconnected() {
-      console.log("Reconnected", this)
-      let formData = new FormData(this.el)
-      let queryString = new URLSearchParams(formData)
-      this.pushEvent("restore_state", { form_data: queryString.toString() })
-    },
-
-    mounted() {
-      console.log("Mounted", this)
-    },
-
-    destroyed() {
-      console.log("Destroyed", this)
-    },
-
-    disconnected() {
-      console.log("Disconnected", this)
-    },
-
-    updated() {
-      console.log("Updated", this)
-    }
-  }
-};
+let Hooks = { CreateConversationFormHooks };
 
 let liveSocket = new LiveSocket("/live", Socket, { hooks: Hooks })
 liveSocket.connect()
