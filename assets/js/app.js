@@ -18,8 +18,18 @@ import "phoenix_html"
 import { Socket } from "phoenix"
 import LiveSocket from "phoenix_live_view"
 import CreateConversationFormHooks from "./dashboard_live";
+import Helpers from "./helpers";
 
 let Hooks = { CreateConversationFormHooks };
 
 let liveSocket = new LiveSocket("/live", Socket, { hooks: Hooks })
 liveSocket.connect()
+
+window.onbeforeunload = e => {
+  // let createConversationForm = document.getElementById("create_conversation_form")
+  // if (!createConversationForm) return
+  // let liveView = createConversationForm.closest("[data-phx-view]")
+
+  // debugger
+  // Helpers.storeFormState(liveView, createConversationForm)
+}

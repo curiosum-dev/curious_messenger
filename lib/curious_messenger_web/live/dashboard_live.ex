@@ -106,6 +106,17 @@ defmodule CuriousMessengerWeb.DashboardLive do
     {:noreply, assign(socket, :conversation_changeset, restored_changeset)}
   end
 
+  require IEx
+
+  def handle_event("store_state", x, socket) do
+    # Decode form data sent from the pre-disconnect form
+    # decoded_form_data = Plug.Conn.Query.decode(form_data)
+
+    IEx.pry()
+
+    {:noreply, socket}
+  end
+
   def handle_info(%{event: "new_conversation", payload: new_conversation}, socket) do
     user = socket.assigns[:current_user]
     user = %{user | conversations: user.conversations ++ [new_conversation]}
