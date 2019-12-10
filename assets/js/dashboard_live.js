@@ -3,7 +3,6 @@ import Helpers from "./helpers"
 const CreateConversationFormHooks = {
   disconnected() {
     console.log("Disconnected", this)
-    Helpers.storeFormState(this, this.el)
   },
 
   reconnected() {
@@ -12,13 +11,11 @@ const CreateConversationFormHooks = {
   },
 
   mounted() {
-    debugger
     console.log("Mounted", this)
   },
 
   destroyed() {
     console.log("Destroyed", this)
-    Helpers.storeFormState(this, this.el)
   },
 
   updated() {

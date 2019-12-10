@@ -1,18 +1,18 @@
 const Helpers = {
-  restoreRemoteFormState(live, form) {
+  restoreRemoteFormState(liveHook, form) {
     let queryString = this.dumpFormStateToQueryString(form)
-    live.pushEvent("restore_state", { form_data: queryString })
+    liveHook.pushEvent("restore_state", { form_data: queryString })
   },
 
-  storeFormState(live, form) {
+  storeFormState(liveHook, form) {
     let queryString = this.dumpFormStateToQueryString(form)
-    live.pushEvent("store_state", { form_data: queryString })
+    liveHook.pushEvent("store_state", { form_data: queryString })
   },
 
   dumpFormStateToQueryString(form) {
     let formData = new FormData(form)
     let queryString = new URLSearchParams(formData)
-    queryString.toString()
+    return queryString.toString()
   }
 }
 

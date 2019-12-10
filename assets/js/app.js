@@ -25,11 +25,20 @@ let Hooks = { CreateConversationFormHooks };
 let liveSocket = new LiveSocket("/live", Socket, { hooks: Hooks })
 liveSocket.connect()
 
-window.onbeforeunload = e => {
-  // let createConversationForm = document.getElementById("create_conversation_form")
-  // if (!createConversationForm) return
-  // let liveView = createConversationForm.closest("[data-phx-view]")
+window.liveSocket = liveSocket
 
-  // debugger
-  // Helpers.storeFormState(liveView, createConversationForm)
+window.onbeforeunload = e => {
+  let createConversationForm = document.getElementById("create_conversation_form")
+
+  if (createConversationForm) {
+    let liveViewElement = createConversationForm.closest("[data-phx-view]")
+    let liveView = liveSocket.views[liveViewElement.id]
+    let liveHook = Object.values(liveView.viewHooks).find(e => e.el == createConversationForm)
+
+    console.log("benis")
+
+    Helpers.storeFormState(liveHook, createConversationForm)
+
+    e.returnValue = true
+  }
 }
