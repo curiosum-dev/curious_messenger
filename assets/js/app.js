@@ -17,7 +17,7 @@ import "phoenix_html"
 // import socket from "./socket"
 import { Socket } from "phoenix"
 import LiveSocket from "phoenix_live_view"
-import CreateConversationFormHooks from "./dashboard_live";
+import CreateConversationFormHooks from "./create_conversation_form_hooks";
 
 let Hooks = { CreateConversationFormHooks };
 
