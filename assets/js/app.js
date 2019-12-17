@@ -18,8 +18,11 @@ import "phoenix_html"
 import { Socket } from "phoenix"
 import LiveSocket from "phoenix_live_view"
 import CreateConversationFormHooks from "./create_conversation_form_hooks";
+import ConversationListHooks from "./conversation_list_hooks";
 
-let Hooks = { CreateConversationFormHooks };
+let Hooks = { CreateConversationFormHooks, ConversationListHooks };
 
 let liveSocket = new LiveSocket("/live", Socket, { hooks: Hooks })
 liveSocket.connect()
+
+Notification.requestPermission()

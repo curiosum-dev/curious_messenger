@@ -24,25 +24,15 @@ defmodule CuriousMessengerWeb.DashboardLive do
      |> assign_contacts(current_user)}
   end
 
-  def handle_event(
-        "create_conversation",
-        %{"conversation" => conversation_form},
-        %{
-          assigns: %{
-            conversation_changeset: changeset,
-            contacts: contacts
-          }
-        } = socket
-      ) do
-    conversation_form =
-      Map.put(
-        conversation_form,
-        "title",
-        if(conversation_form["title"] == "",
-          do: build_title(changeset, contacts),
-          else: conversation_form["title"]
-        )
-      )
+  def handle_event("create_conversation", %{"conversation" => conversation_form},
+                   %{assigns: %{conversation_changeset: changeset, contacts: contacts}} = socket) do
+    title = if conversation_form["title"] == "" do
+              build_title(changeset, contacts)
+            else
+              conversation_form["title"]
+            end
+
+    conversation_form = Map.put(conversation_form, "title", title)
 
     case Chat.create_conversation(conversation_form) do
       {:ok, _} ->
@@ -108,7 +98,8 @@ defmodule CuriousMessengerWeb.DashboardLive do
 
   def handle_info(%{event: "new_conversation", payload: new_conversation}, socket) do
     user = socket.assigns[:current_user]
-    user = %{user | conversations: user.conversations ++ [new_conversation]}
+    annotated_conversation = new_conversation |> Map.put(:notify, true)
+    user = %{user | conversations: (user.conversations |> Enum.map(&(Map.delete(&1, :notify)))) ++ [annotated_conversation]}
 
     {:noreply, assign(socket, :current_user, user)}
   end
