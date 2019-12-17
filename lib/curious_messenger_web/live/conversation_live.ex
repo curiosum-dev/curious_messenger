@@ -52,7 +52,14 @@ defmodule CuriousMessengerWeb.ConversationLive do
   end
 
   def handle_info(%{event: "new_message", payload: new_message}, socket) do
-    updated_messages = socket.assigns[:messages] ++ [new_message]
+    annotated_message =
+      if new_message.user.id != socket.assigns[:user].id do
+        new_message |> Map.put(:incoming, true)
+      else
+        new_message
+      end
+
+    updated_messages = socket.assigns[:messages] ++ [annotated_message]
 
     {:noreply, socket |> assign(:messages, updated_messages)}
   end
