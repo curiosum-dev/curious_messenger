@@ -11,10 +11,14 @@
         <%= submit "Send" %>
       </form>
     </div>
-    <div>
+    <div phx-hook="ConversationHooks">
       <b>Messages:</b>
       <%= for message <- @messages do %>
-        <div>
+        <%= if Map.get(message, :incoming) do %>
+          <div data-incoming="true">
+        <% else %>
+          <div>
+        <% end %>
           <b><%= message.user.nickname %></b>: <%= message.content %>
         </div>
       <% end %>

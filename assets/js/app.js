@@ -19,8 +19,9 @@ import { Socket } from "phoenix"
 import LiveSocket from "phoenix_live_view"
 import CreateConversationFormHooks from "./create_conversation_form_hooks";
 import ConversationListHooks from "./conversation_list_hooks";
+import ConversationHooks from "./conversation_hooks";
 
-let Hooks = { CreateConversationFormHooks, ConversationListHooks };
+let Hooks = { CreateConversationFormHooks, ConversationListHooks, ConversationHooks };
 
 let liveSocket = new LiveSocket("/live", Socket, { hooks: Hooks })
 liveSocket.connect()
