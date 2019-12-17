@@ -3,7 +3,7 @@ const ConversationListHooks = {
     let newConversationLink = this.el.querySelector('[data-notify]')
     if (!newConversationLink) return
 
-    let notification = new Notification(newConversationLink.innerHTML)
+    let notification = new Notification(newConversationLink.innerText)
     notification.onclick = () => window.open(newConversationLink.href)
   }
 }
