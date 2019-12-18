@@ -539,10 +539,9 @@ defmodule CuriousMessenger.Chat do
     case result do
       {:ok, conversation} ->
         conversation.conversation_members
-        |> Enum.map(& &1.user_id)
         |> Enum.each(
           &CuriousMessengerWeb.Endpoint.broadcast!(
-            "user_conversations_#{&1}",
+            "user_conversations_#{&1.user_id}",
             "new_conversation",
             conversation
           )
