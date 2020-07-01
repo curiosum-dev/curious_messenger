@@ -1,20 +1,13 @@
-# CuriousMessenger
+# Curious Messenger
 
-To start your Phoenix server:
+Companion repository for Phoenix LiveView Messenger app by Curiosum.dev.
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+To learn more, head on over to our blog:
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Part 1: https://curiosum.dev/blog/elixir-phoenix-liveview-messenger-part-1?utm_source=github&utm_medium=social
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+Part 2: https://curiosum.dev/blog/elixir-phoenix-liveview-messenger-part-2?utm_source=github&utm_medium=social
 
-## Learn more
+Part 3: https://curiosum.dev/blog/elixir-phoenix-liveview-messenger-part-3?utm_source=github&utm_medium=social
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+Part 4: https://curiosum.dev/blog/elixir-phoenix-liveview-messenger-part-4?utm_source=github&utm_medium=social
