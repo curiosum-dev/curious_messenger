@@ -6,5 +6,5 @@
 <%= if @current_user do %>
   <%= live_render(@conn,
                   CuriousMessengerWeb.DashboardLive,
-                  session: %{current_user: @current_user}) %>
+                  session: %{"current_user" => @current_user}) %>
 <% end%>

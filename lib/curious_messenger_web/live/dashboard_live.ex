@@ -14,7 +14,7 @@ defmodule CuriousMessengerWeb.DashboardLive do
     DashboardView.render("show.html", assigns)
   end
 
-  def mount(%{current_user: current_user}, socket) do
+  def mount(_params, %{"current_user" => current_user}, socket) do
     {:ok,
      socket
      |> assign(current_user: current_user)
