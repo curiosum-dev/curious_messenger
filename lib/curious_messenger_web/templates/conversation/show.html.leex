@@ -11,7 +11,7 @@
         <%= submit "Send" %>
       </form>
     </div>
-    <div phx-hook="ConversationHooks">
+    <div id="conversation" phx-hook="ConversationHooks">
       <b>Messages:</b>
       <%= for message <- @messages do %>
         <%= if Map.get(message, :incoming) do %>
