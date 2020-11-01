@@ -1,5 +1,5 @@
 defmodule CuriousMessengerWeb.ConversationLive do
-  use Phoenix.LiveView
+  use Phoenix.LiveView, layout: {CuriousMessengerWeb.LayoutView, "live.html"}
   use Phoenix.HTML
 
   alias CuriousMessenger.{Auth, Chat, Repo}

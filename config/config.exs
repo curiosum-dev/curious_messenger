@@ -15,7 +15,7 @@ config :curious_messenger, CuriousMessengerWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "1m10ShO0FK05tgr9HPV0aA5t41WshopK8XT3rr/wbfwTfB99HqlsP/aDY7343/Mi",
   render_errors: [view: CuriousMessengerWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: CuriousMessenger.PubSub, adapter: Phoenix.PubSub.PG2],
+  pubsub_server: CuriousMessenger.PubSub,
   live_view: [
     signing_salt: "w9cORhPKD1TBowdK7sZpM9GkTs0d21Wk"
   ]
