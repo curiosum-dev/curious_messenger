@@ -2,3 +2,12 @@
 
 @import "./phoenix.css";
 @import "../node_modules/nprogress/nprogress.css";
+
+.phx-error {
+  opacity: .25;
+  cursor: not-allowed;
+}
+
+.phx-error * {
+  pointer-events: none;
+}
