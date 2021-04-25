@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :curious_messenger, CuriousMessengerWeb.Endpoint,
+config :fizyl_chat, FizylChatWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -46,13 +46,13 @@ config :curious_messenger, CuriousMessengerWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :curious_messenger, CuriousMessengerWeb.Endpoint,
+config :fizyl_chat, FizylChatWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/curious_messenger_web/{live,views}/.*(ex)$",
-      ~r"lib/curious_messenger_web/templates/.*(eex)$"
+      ~r"lib/fizyl_chat_web/{live,views}/.*(ex)$",
+      ~r"lib/fizyl_chat_web/templates/.*(eex)$"
     ]
   ]
 

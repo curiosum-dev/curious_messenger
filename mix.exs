@@ -1,9 +1,9 @@
-defmodule CuriousMessenger.MixProject do
+defmodule FizylChat.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :curious_messenger,
+      app: :fizyl_chat,
       version: "0.1.0",
       elixir: "~> 1.11",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule CuriousMessenger.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {CuriousMessenger.Application, []},
+      mod: {FizylChat.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

@@ -1,4 +1,4 @@
-defmodule CuriousMessenger.Repo.Migrations.CreateChatMessageReactions do
+defmodule FizylChat.Repo.Migrations.CreateChatMessageReactions do
   use Ecto.Migration
 
   def change do

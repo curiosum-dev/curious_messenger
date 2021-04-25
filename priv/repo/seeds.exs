@@ -5,15 +5,15 @@
 # Inside the script, you can read and write to any of your
 # repositories directly:
 #
-#     CuriousMessenger.Repo.insert!(%CuriousMessenger.SomeSchema{})
+#     FizylChat.Repo.insert!(%FizylChat.SomeSchema{})
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias CuriousMessenger.Auth.User
-alias CuriousMessenger.Chat.Conversation
+alias FizylChat.Auth.User
+alias FizylChat.Chat.Conversation
 
-alias CuriousMessenger.{Auth, Chat}
+alias FizylChat.{Auth, Chat}
 
 rand1 = Enum.random(0..1000)
 rand2 = Enum.random(0..1000)

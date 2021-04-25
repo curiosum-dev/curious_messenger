@@ -1,4 +1,6 @@
-# Curious Messenger
+# Fizyl Chat, adapted from:
+
+### Curious Messenger
 
 Companion repository for Phoenix LiveView Messenger app by Curiosum.dev.
 

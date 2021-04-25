@@ -1,3 +1,3 @@
-defmodule CuriousMessengerWeb.PageViewTest do
-  use CuriousMessengerWeb.ConnCase, async: true
+defmodule FizylChatWeb.PageViewTest do
+  use FizylChatWeb.ConnCase, async: true
 end

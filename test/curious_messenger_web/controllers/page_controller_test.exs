@@ -1,5 +1,5 @@
-defmodule CuriousMessengerWeb.PageControllerTest do
-  use CuriousMessengerWeb.ConnCase
+defmodule FizylChatWeb.PageControllerTest do
+  use FizylChatWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")

@@ -1,0 +1,10 @@
+<section class="phx-hero">
+  <h1><%= gettext "Welcome to %{name}!", name: "Fizyl Chat" %></h1>
+  <p>An awesome instant messaging app<br/>made with ❤️ by <a href="https://www.fizyl.com/">Fizyl</a>.</p>
+</section>
+
+<%= if @current_user do %>
+  <%= live_render(@conn,
+                  FizylChatWeb.DashboardLive,
+                  session: %{"current_user" => @current_user}) %>
+<% end%>

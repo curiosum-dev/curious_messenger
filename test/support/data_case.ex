@@ -1,4 +1,4 @@
-defmodule CuriousMessenger.DataCase do
+defmodule FizylChat.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -16,20 +16,20 @@ defmodule CuriousMessenger.DataCase do
 
   using do
     quote do
-      alias CuriousMessenger.Repo
+      alias FizylChat.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import CuriousMessenger.DataCase
+      import FizylChat.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(CuriousMessenger.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(FizylChat.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(CuriousMessenger.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(FizylChat.Repo, {:shared, self()})
     end
 
     :ok

@@ -1,4 +1,4 @@
-defmodule CuriousMessenger.Repo.Migrations.AddPowFieldsToUsers do
+defmodule FizylChat.Repo.Migrations.AddPowFieldsToUsers do
   use Ecto.Migration
 
   def change do

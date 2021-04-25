@@ -7,15 +7,15 @@
 # General application configuration
 use Mix.Config
 
-config :curious_messenger,
-  ecto_repos: [CuriousMessenger.Repo]
+config :fizyl_chat,
+  ecto_repos: [FizylChat.Repo]
 
 # Configures the endpoint
-config :curious_messenger, CuriousMessengerWeb.Endpoint,
+config :fizyl_chat, FizylChatWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "1m10ShO0FK05tgr9HPV0aA5t41WshopK8XT3rr/wbfwTfB99HqlsP/aDY7343/Mi",
-  render_errors: [view: CuriousMessengerWeb.ErrorView, accepts: ~w(html json)],
-  pubsub_server: CuriousMessenger.PubSub,
+  render_errors: [view: FizylChatWeb.ErrorView, accepts: ~w(html json)],
+  pubsub_server: FizylChat.PubSub,
   live_view: [
     signing_salt: "w9cORhPKD1TBowdK7sZpM9GkTs0d21Wk"
   ]
@@ -29,10 +29,10 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 # Configure Pow with user schema for authentication
-config :curious_messenger, :pow,
-  user: CuriousMessenger.Auth.User,
-  repo: CuriousMessenger.Repo,
-  web_module: CuriousMessengerWeb
+config :fizyl_chat, :pow,
+  user: FizylChat.Auth.User,
+  repo: FizylChat.Repo,
+  web_module: FizylChatWeb
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

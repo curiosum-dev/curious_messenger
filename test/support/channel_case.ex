@@ -1,4 +1,4 @@
-defmodule CuriousMessengerWeb.ChannelCase do
+defmodule FizylChatWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,15 +21,15 @@ defmodule CuriousMessengerWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint CuriousMessengerWeb.Endpoint
+      @endpoint FizylChatWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(CuriousMessenger.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(FizylChat.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(CuriousMessenger.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(FizylChat.Repo, {:shared, self()})
     end
 
     :ok
