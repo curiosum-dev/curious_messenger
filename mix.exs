@@ -44,7 +44,8 @@ defmodule FizylChat.MixProject do
       {:gettext, "~> 0.18.2"},
       {:jason, "~> 1.2.2"},
       {:plug_cowboy, "~> 2.4.1"},
-      {:pow, "~> 1.0.21"}
+      {:pow, "~> 1.0.21"},
+      {:websockex, "~> 0.4.2"}
     ]
   end
 
