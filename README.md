@@ -1,4 +1,11 @@
-# Fizyl Chat, adapted from:
+## To run: 
+1. Start docker
+2. Run docker-compose up -d to run postgres
+3. run mix phx.server to start the server
+
+## Fizyl Chat, adapted from:
+
+
 
 ### Curious Messenger
 

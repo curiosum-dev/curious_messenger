@@ -35,7 +35,10 @@ defmodule FizylChatWeb.Router do
   end
 
   scope "/", FizylChatWeb do
-    pipe_through [:browser, :protected]
+    # Enable this to route traffic through protected route
+    # pipe_through [:browser, :protected]
+    
+    pipe_through [:browser]
 
     resources "/conversations", ConversationController
 

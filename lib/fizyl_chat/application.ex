@@ -20,7 +20,8 @@ defmodule FizylChat.Application do
 
       # Test websocket connection to Kraken websocket url
       # Throws an error if it doesn't come after the pubsub server for some reason 
-      Ticker.Websocket
+      # TODO: Enable this later for Kraken websocket data
+      # Ticker.Websocket
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
